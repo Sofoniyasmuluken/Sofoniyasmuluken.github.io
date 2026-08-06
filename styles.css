@@ -1,0 +1,80 @@
+:root{
+  --bg:#071026;       /* deep navy */
+  --panel:#071827;
+  --accent:#1e88ff;   /* bright blue */
+  --muted:#bfcbdc;
+  --light:#ffffff;
+  --card:#071b2a;
+  --max-width:1100px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--light);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+
+.container{
+  width:90%;
+  max-width:var(--max-width);
+  margin:0 auto;
+}
+
+/* Header */
+.site-header{background:linear-gradient(180deg, rgba(7,16,38,0.9), rgba(7,16,38,0.7)); position:sticky; top:0; z-index:20; border-bottom:1px solid rgba(255,255,255,0.03)}
+.header-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+.brand{display:flex; gap:12px; align-items:center; text-decoration:none; color:var(--light)}
+.logo{width:64px; height:64px; object-fit:contain; border-radius:8px; background:transparent}
+.brand-text h1{margin:0; font-size:18px; letter-spacing:0.6px}
+.tagline{margin:0; color:var(--muted); font-size:12px}
+
+/* nav */
+.nav a{color:var(--muted); margin-left:18px; text-decoration:none; font-weight:600}
+.nav a:hover{color:var(--light)}
+
+/* Hero */
+.hero{padding:48px 0; display:flex; align-items:center}
+.hero-inner{display:flex; gap:28px; align-items:center}
+.hero-copy{flex:1}
+.hero-copy h2{margin:0 0 12px; font-size:28px}
+.lead{color:var(--muted); margin:0 0 18px}
+.hero-image img{width:220px; max-width:45%; border-radius:12px; background:transparent}
+
+/* Buttons */
+.btn{display:inline-block; padding:10px 16px; background:transparent; color:var(--light); border:2px solid rgba(255,255,255,0.06); border-radius:8px; text-decoration:none; cursor:pointer}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#00a0ff); color:#fff; border:none}
+
+/* Services cards */
+.section{padding:36px 0}
+.services h3, .about h3, .contact h3{margin:0 0 18px; font-size:22px}
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:10px; min-height:140px}
+.card .icon{font-size:28px}
+.card h4{margin:8px 0}
+.card p{color:var(--muted); margin:0}
+
+/* About */
+.about p{color:var(--muted)}
+
+/* Contact layout */
+.contact-inner{display:grid; grid-template-columns:1fr 320px; gap:22px}
+.contact-form{background:var(--card); padding:18px; border-radius:10px}
+.contact-form label{display:block; margin-bottom:10px; color:var(--muted)}
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea{width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); color:var(--light)}
+.note{color:var(--muted); font-size:14px}
+.contact-info{background:transparent; padding:18px; border-radius:10px; color:var(--muted)}
+
+/* Footer */
+.site-footer{padding:18px 0; border-top:1px solid rgba(255,255,255,0.03); text-align:center; color:var(--muted); font-size:14px}
+
+/* Responsive */
+@media (max-width:880px){
+  .hero-inner{flex-direction:column; text-align:center}
+  .hero-image img{max-width:55%}
+  .contact-inner{grid-template-columns:1fr}
+  .nav{display:none}
+}
