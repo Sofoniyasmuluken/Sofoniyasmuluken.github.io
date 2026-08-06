@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Master Tech Solutions — Mastering your digital success.</title>
+  <meta name="description" content="Master Tech Solutions provides website & web development, digital menus, service systems, social media management and advertising." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <img src="assets/logo.png" alt="Master Tech Solutions logo" class="logo" />
+        <div class="brand-text">
+          <h1>Master Tech Solutions</h1>
+          <p class="tagline">Mastering your digital success.</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h2>Build your digital presence with confidence</h2>
+          <p class="lead">We create web applications, digital menus, service systems and digital solutions — plus social media management and advertising — all in one place.</p>
+          <p><a class="btn primary" href="#contact">Get a free consultation</a></p>
+        </div>
+        <div class="hero-image">
+          <img src="assets/logo.png" alt="Master Tech Solutions" />
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="container">
+        <h3>Our Services</h3>
+        <div class="cards">
+          <article class="card">
+            <div class="icon">💻</div>
+            <h4>Website & Web Development</h4>
+            <p>We build responsive, fast and secure websites and web applications tailored to your business needs.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📱</div>
+            <h4>Digital Menu</h4>
+            <p>Create modern digital menus for restaurants and services that are easy to update and mobile-friendly.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚙️</div>
+            <h4>Service Systems & Digital Solutions</h4>
+            <p>We design complete service systems and IT solutions to automate workflows and improve customer experience.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📣</div>
+            <h4>Social Media Management & Advertising</h4>
+            <p>Grow your brand with targeted social media management, content creation and advertising campaigns.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h3>About Us</h3>
+        <p>Master Tech Solutions provides a variety of unique digital services all in one place. We work with businesses to design, build and launch digital products that help them innovate, grow and succeed.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact-inner">
+        <div class="contact-form">
+          <h3>Contact Us</h3>
+          <p>Send us a message and we'll get back to you about your project.</p>
+
+          <!-- Replace the action URL with your Formspree endpoint (e.g. https://formspree.io/f/your-id) -->
+          <form action="https://formspree.io/f/your-form-id" method="POST">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="_replyto" required />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <input type="hidden" name="_subject" value="Website inquiry from Master Tech Solutions" />
+            <button class="btn" type="submit">Send message</button>
+          </form>
+
+          <p class="note">Or email us directly at <a href="mailto:sofoniyasmuluken@gmail.com">sofoniyasmuluken@gmail.com</a> or call <a href="tel:+251974846244">+251 974 846 244</a>.</p>
+          <p>Follow us on TikTok: <a href="https://tiktok.com/@mastertechsolution24" target="_blank">@mastertechsolution24</a></p>
+          <p>Instagram: @your_handle • Telegram: @your_handle</p>
+        </div>
+
+        <div class="contact-info">
+          <h4>Why work with us?</h4>
+          <ul>
+            <li>Local expertise with global standards</li>
+            <li>Fast delivery and clear pricing</li>
+            <li>Ongoing support and maintenance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Master Tech Solutions. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // small script to set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
