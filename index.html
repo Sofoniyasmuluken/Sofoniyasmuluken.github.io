@@ -10,19 +10,20 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#">
-        <img src="assets/logo.png" alt="Master Tech Solutions logo" class="logo" />
-        <div class="brand-text">
-          <h1>Master Tech Solutions</h1>
-          <p class="tagline">Mastering your digital success.</p>
-        </div>
-      </a>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+     <a class="brand" href="#"> <img src="assets/logo.png" alt="Master Tech Solutions logo" class="logo" /> <div class="brand-text"> <h1>Master Tech Solutions</h1> <p class="tagline">Mastering your digital success.</p> </div> </a>
+     <!-- desktop nav -->
+<nav class="nav" aria-label="Main navigation">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- hamburger for mobile -->
+<button class="menu-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+  ☰
+   <!-- mobile slide-in nav -->
+  <nav id="mobile-nav" class="mobile-nav" aria-hidden="true"> <a href="#services" onclick="document.getElementById('mobile-nav').classList.remove('open')">Services</a> <a href="#about" onclick="document.getElementById('mobile-nav').classList.remove('open')">About</a> <a href="#contact" onclick="document.getElementById('mobile-nav').classList.remove('open')">Contact</a> </nav>
+</button>
   </header>
 
   <main>
@@ -84,21 +85,22 @@
           <p>Send us a message and we'll get back to you about your project.</p>
 
           <!-- Replace the action URL with your Formspree endpoint (e.g. https://formspree.io/f/your-id) -->
-          <form action="https://formspree.io/f/your-form-id" method="POST">
+         <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
             <label>
               <span>Name</span>
-              <input type="text" name="name" required />
+              <input type="text" name="name" required>
             </label>
             <label>
               <span>Email</span>
-              <input type="email" name="_replyto" required />
+              <input type="email" name="_replyto" required>
             </label>
             <label>
               <span>Message</span>
               <textarea name="message" rows="5" required></textarea>
             </label>
-            <input type="hidden" name="_subject" value="Website inquiry from Master Tech Solutions" />
+            <input type="hidden" name="_subject" value="Website inquiry from Master Tech Solutions"> <!-- optional: redirect after submit (replace URL if you add a thank-you page) --> <!-- <input type="hidden" name="_next" value="https://Sofoniyasmuluken.github.io/thank-you.html"> -->
             <button class="btn" type="submit">Send message</button>
+           <div id="form-status" class="form-status" role="status" aria-live="polite"></div> 
           </form>
 
           <p class="note">Or email us directly at <a href="mailto:sofoniyasmuluken@gmail.com">sofoniyasmuluken@gmail.com</a> or call <a href="tel:+251974846244">+251 974 846 244</a>.</p>
@@ -125,8 +127,95 @@
   </footer>
 
   <script>
-    // small script to set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+document.addEventListener('DOMContentLoaded', function () {
+  // 1) Set current year in footer
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // 2) Mobile menu toggle + close behavior
+  const btn = document.querySelector('.menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  if (btn && mobileNav) {
+    btn.addEventListener('click', function () {
+      const opened = mobileNav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      mobileNav.setAttribute('aria-hidden', opened ? 'false' : 'true');
+    });
+
+    // Close mobile nav when clicking outside it
+    document.addEventListener('click', function (e) {
+      if (!mobileNav.classList.contains('open')) return;
+      if (!mobileNav.contains(e.target) && !btn.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  // 3) AJAX contact form submit (works with Formspree)
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  if (form && status) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      status.style.display = 'none';
+      status.className = 'form-status'; // reset classes
+
+      // Basic validation check
+      if (!form.action || form.action.includes('your-form-id')) {
+        status.textContent = 'Contact form is not configured. Please email us at sofoniyasmuluken@gmail.com';
+        status.classList.add('error');
+        status.style.display = 'block';
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (resp.ok) {
+          status.textContent = 'Message sent — thank you! We will reply soon.';
+          status.classList.add('success');
+          status.style.display = 'block';
+          form.reset();
+        } else {
+          // Attempt to read server error message
+          let errMsg = 'There was a problem sending the message. Please try again later.';
+          try {
+            const json = await resp.json();
+            if (json && json.error) errMsg = json.error;
+          } catch (_) {}
+          status.textContent = errMsg;
+          status.classList.add('error');
+          status.style.display = 'block';
+        }
+      } catch (err) {
+        status.textContent = 'Unable to send message. Check your internet connection and try again.';
+        status.classList.add('error');
+        status.style.display = 'block';
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>
